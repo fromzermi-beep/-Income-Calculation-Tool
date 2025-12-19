@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ماشین حساب درآمد کسب کارهای خوزستان- کشف پتانسیل واقعی کسب‌وکار شما</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* هشدار کوتاه و خوانا */
+        .alert-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 3px solid #ef4444;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .alert-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .alert-icon {
+            color: #dc2626;
+            font-size: 24px;
+        }
+        
+        .alert-title {
+            color: #dc2626;
+            font-size: 20px;
+            font-weight: 800;
+            flex-grow: 1;
+        }
+        
+        .alert-content {
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            border-right: 4px solid #ef4444;
+            margin-bottom: 15px;
+        }
+        
+        .alert-text {
+            color: #7f1d1d;
+            font-size: 15px;
+            line-height: 1.7;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        
+        .alert-cities {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: 700;
+            margin: 2px 4px;
+            font-size: 13px;
+        }
+        
+        .alert-stat {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: 800;
+            margin: 2px 4px;
+            font-size: 14px;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .solution-card {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid #10b981;
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 15px;
+        }
+        
+        .solution-text {
+            color: #065f46;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .solution-highlight {
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: 800;
+            margin: 0 5px;
+        }
+        
+        /* هدر */
+        .header {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            border-radius: 12px;
+            border: 2px solid #3b82f6;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #1d4ed8;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            color: #475569;
+            font-size: 15px;
+        }
+        
+        /* شبکه کسب‌وکارها */
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .business-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .business-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .business-btn {
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 12px 5px;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .business-btn:hover {
+            border-color: #3b82f6;
+        }
+        
+        .business-btn.selected {
+            background: #dbeafe;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+            font-weight: 700;
+        }
+        
+        /* تنظیمات */
+        .settings {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .setting-item {
+            margin-bottom: 18px;
+        }
+        
+        .setting-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #334155;
+            font-size: 14px;
+        }
+        
+        .setting-value {
+            color: #3b82f6;
+            font-weight: 800;
+            font-size: 16px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* نتایج */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .result-card:nth-child(1) {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+        
+        .result-card:nth-child(2) {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .result-value {
+            font-size: 32px;
+            font-weight: 900;
+            margin: 10px 0;
+        }
+        
+        .result-card:nth-child(1) .result-value {
+            color: #dc2626;
+        }
+        
+        .result-card:nth-child(2) .result-value {
+            color: #059669;
+        }
+        
+        .result-label {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        
+        /* تحلیل */
+        .analysis {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .analysis h3 {
+            color: #7c3aed;
+            margin-bottom: 12px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .analysis-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475569;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-right: 3px solid #8b5cf6;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 900;
+            color: #f59e0b;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+        }
+        
+        /* دکمه واتساپ */
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.2s;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+        }
+        
+        .btn-guarantee {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        /* فوتر */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 13px;
+            padding: 15px;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .footer-highlight {
+            color: #1d4ed8;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- هشدار کوتاه و خوانا -->
+    <div class="alert-box">
+        <div class="alert-header">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-title">هشدار فوری: هر روز در حال از دست دادن درآمد هستید</div>
+        </div>
+        
+        <div class="alert-content">
+            <p class="alert-text">
+                روزانه 
+                <span class="alert-stat">صدها مسافر</span>
+                از 
+                <span class="alert-cities">اهواز</span>
+                <span class="alert-cities">آبادان</span>
+                <span class="alert-cities">اصفهان</span>
+                <span class="alert-cities">تهران</span>
+                و دیگر شهرها به ایذه سفر می‌کنند اما 
+                <span class="alert-stat">۹۰٪</span>
+                آنان نمی‌توانند کسب‌وکار شما را پیدا کنند.
+            </p>
+            <p class="alert-text">
+                فیلترینگ شبکه‌های اجتماعی می تواند ارتباط شما را قطع کند و مشتریان ثروتمند به رقبای آنلاین در سطح اینترنت مراجعه می‌کنند. 
+                <strong>شما روزانه میلیون‌ها تومان درآمد بالقوه را از دست می‌دهید.</strong>
+            </p>
+            <p class="alert-text">
+                درآمد شما در سطح محلی وشهر خودتان محدود مانده در حالی که مسافران حاضرند برای کیفیت و خدمات خوب، 
+                <span class="alert-stat">۳۰٪ بیشتر</span>
+                پرداخت کنند.
+            </p>
+        </div>
+        
+        <div class="solution-card">
+            <p class="solution-text">
+                راه حل سریع و تضمینی: ساخت 
+                <span class="solution-highlight">صفحه معرفی اختصاصی حرفه‌ای</span> 
+                در کمتر از ۲۴ ساعت برای 
+                <span class="solution-highlight">دیده شدن در سراسر ایران</span>
+                و جذب مسافران ثروتمند
+            </p>
+        </div>
+    </div>
+    
+    <!-- هدر -->
+    <div class="header">
+        <h1><i class="fas fa-calculator"></i> ماشین حساب درآمد واقعی ایذه</h1>
+        <p>کشف کنید چقدر درآمد را به خاطر نداشتن صفحه اینترنتی از دست می‌دهید</p>
+    </div>
+    
+    <!-- انتخاب کسب‌وکار -->
+    <div class="business-grid" id="businessGrid">
+        <button class="business-btn" data-job="boutique">بوتیک لباس</button>
+        <button class="business-btn" data-job="underwear">لباس زیر</button>
+        <button class="business-btn" data-job="shoes">کفش فروشی</button>
+        <button class="business-btn" data-job="childcloth">پوشاک کودک</button>
+        
+        <button class="business-btn" data-job="grocery">سوپرمارکت</button>
+        <button class="business-btn" data-job="dryfruit">خشکبار</button>
+        <button class="business-btn" data-job="restaurant">رستوران</button>
+        <button class="business-btn" data-job="bakery">نانوایی</button>
+        
+        <button class="business-btn" data-job="salon">آرایشگاه</button>
+        <button class="business-btn" data-job="repair">تعمیرگاه</button>
+        <button class="business-btn" data-job="coffee">کافه</button>
+        <button class="business-btn" data-job="laundry">خشکشویی</button>
+        
+        <button class="business-btn" data-job="electronics">الکترونیک</button>
+        <button class="business-btn" data-job="pharmacy">داروخانه</button>
+        <button class="business-btn" data-job="gift">هدیه فروشی</button>
+        <button class="business-btn" data-job="book">کتابفروشی</button>
+    </div>
+    
+    <!-- تنظیمات -->
+    <div class="settings">
+        <div class="setting-item">
+            <div class="setting-label">
+                <span>مشتری روزانه:</span>
+                <span class="setting-value" id="customerValue">۲۰ نفر</span>
+            </div>
+            <input type="range" id="customerSlider" min="5" max="100" value="20">
+        </div>
+        
+        <div class="setting-item">
+            <div class="setting-label">
+                <span>میانگین خرید:</span>
+                <span class="setting-value" id="priceValue">۵۰,۰۰۰ تومان</span>
+            </div>
+            <input type="range" id="priceSlider" min="10000" max="300000" step="10000" value="50000">
+        </div>
+        
+        <div class="setting-item">
+            <div class="setting-label">
+                <span>روز کاری ماه:</span>
+                <span class="setting-value" id="daysValue">۲۶ روز</span>
+            </div>
+            <input type="range" id="daysSlider" min="15" max="31" value="26">
+        </div>
+    </div>
+    
+    <!-- نتایج -->
+    <div class="results">
+        <div class="result-card">
+            <div class="result-label">درآمد فعلی (محلی)</div>
+            <div class="result-value" id="currentIncome">۱۵,۰۰۰,۰۰۰</div>
+            <div class="result-label">درآمد محدود به مشتریان محلی</div>
+        </div>
+        
+        <div class="result-card">
+            <div class="result-label">درآمد با جذب مسافران</div>
+            <div class="result-value" id="potentialIncome">۲۴,۰۰۰,۰۰۰</div>
+            <div class="result-label">درآمد واقعی با صفحه اختصاصی</div>
+        </div>
+    </div>
+    
+    <!-- تحلیل -->
+    <div class="analysis">
+        <h3><i class="fas fa-chart-line"></i> تحلیل تخصصی وضعیت شما</h3>
+        <div class="analysis-content" id="analysisText">
+            <!-- تحلیل پویا -->
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="visitorCount">۴۵۰+</div>
+                <div class="stat-label">مسافر ماهانه</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="conversionRate">۳۵٪</div>
+                <div class="stat-label">نرخ تبدیل</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="growthPotential">۶۰٪</div>
+                <div class="stat-label">رشد درآمد</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- دکمه واتساپ -->
+    <button class="whatsapp-btn" id="whatsappButton">
+        <i class="fab fa-whatsapp"></i>
+        <div>
+            <div>دریافت صفحه معرفی اختصاصی و افزایش درآمد</div>
+            <div class="btn-guarantee">(راه‌حلی برای دیده شدن شما )</div>
+        </div>
+    </button>
+    
+    <!-- فوتر -->
+    <div class="footer">
+        <p><span class="footer-highlight">ایذه آگهی</span> • پلتفرم تخصصی برای رشد کسب‌وکارهای ایذه</p>
+        <p style="margin-top: 8px; font-size: 13px;">ما دقیقاً می‌دانیم مسافرانی که به ایذه می آیندبه دنبال چه هستند و چگونه آنان را به مشتریان وفادار شما تبدیل کنیم</p>
+        <p style="margin-top: 8px; font-size: 12px; color: #3b82f6; font-weight: 600;">
+            <i class="fas fa-phone-alt"></i> پشتیبانی تخصصی: ۰۹۲۲ ۰۷۳ ۰۶۲۸
+        </p>
+    </div>
+
+    <script>
+        // داده‌های تحلیل عمیق‌تر
+        const jobAnalysis = {
+            boutique: `مسافران برای خرید لباس محلی و با کیفیت به ایذه می‌آیند اما شما را پیدا نمی‌کنند. 
+            یک صفحه معرفی اختصاصی با عکس‌های با کیفیت، مسافران را مستقیماً به مغازه شما هدایت می‌کند. 
+            مسافران معمولاً ۴۰٪ بیشتر از مشتریان محلی خرج می‌کنند.`,
+            
+            underwear: `اعتماد، کلید خرید لباس زیر است. مسافران به دنبال برندهای معتبر می‌گردند. 
+            صفحه معرفی اختصاصی شمادربلاگ ما اعتماد ایجاد کرده و مشتریان را جذب می‌کند. 
+            امکان خرید برای مهمانی‌ها و مراسم را فراهم می‌کنید.`,
+            
+            shoes: `مسافران کیفیت و دوام می‌خواهند. آنها حاضرند برای کفش خوب پول بیشتری بپردازند. 
+            نمایش محصولات در صفحه اینترنتی، فروش شما را تا ۶۰٪ افزایش می‌دهد. 
+            مسافران از قبل تصمیم گرفته‌اند خرید کنند، فقط باید شما را پیدا کنند.`,
+            
+            childcloth: `والدین مسافر نگران کیفیت و سلامت لباس کودکان هستند. 
+            تأکید بر مواد اولیه سالم و استاندارد در صفحه شما، اعتماد کامل ایجاد می‌کند. 
+            خانواده‌ها برای کودکان خود بهترین را می‌خواهند و هزینه آن مهم نیست.`,
+            
+            grocery: `مسافران و مهمانان هتل‌ها برای خرید روزانه سرگردان هستند. 
+            صفحه شما با نشان دادن مسیر دقیق و محصولات، اولین انتخاب آنان خواهد بود. 
+            مسافران معمولاً خریدهای فوری و با حجم بالا دارند.`,
+            
+            dryfruit: `خشکبار ایذه معروف است. مسافران به دنبال سوغات با کیفیت می‌گردند. 
+            صفحه معرفی اختصاصی شما دربلاگ مارا به مقصد اصلی خرید خشکبار تبدیل می‌کند. 
+            امکان خرید آنلاین و ارسال به شهرهای دیگر، درآمد شما را چند برابر می‌کند.`,
+            
+            restaurant: `گردشگران گرسنه هستند و به دنبال رستوران با غذاهای محلی می‌گردند. 
+            نمایش منو و عکس غذاهای شما، تصمیم آنان را نهایی می‌کند. 
+            مسافران معمولاً گروهی غذا می‌خورند و صورت حساب بالایی دارند.`,
+            
+            salon: `مهمانان مراسمها و جشنها و مسافران نیاز فوری به خدمات آرایشگاهی دارند. 
+            نوبت‌گیری آنلاین و نمایش نمونه کارها، مشتریان مطمئن را جذب می‌کند. 
+            خدمات به مسافران معمولاً با هزینه بالاتر ارائه می‌شود.`,
+            
+            repair: `مسافران در صورت خرابی وسیله نقلیه مضطرب و عجله دارند. 
+            صفحه معتبرمعتبر با شماره تماس واضح، شما را به نجات‌دهنده آنان تبدیل می‌کند. 
+            آنان حاضرند برای تعمیر فوری هزینه بیشتری پرداخت کنند.`,
+            
+            coffee: `مسافران کسب‌وکاری و گردشگران به کافه نیاز دارند. 
+            نمایش فضای کافه و منو نوشیدنی‌ها، مشتریان را جذب می‌کند. 
+            مسافران معمولاً زمان بیشتری در کافه می‌مانند و سفارشات بیشتری می‌گیرند.`,
+            
+            electronics: `خرید الکترونیک نیاز به تخصص و اعتماد دارد. 
+            نمایش اطلاعات فنی و گارانتی در صفحه شما، تصمیم خرید را آسان می‌کند. 
+            مسافران اغلب برای خرید محصولات خاص به شهرهای دیگر سفر می‌کنند.`,
+            
+            pharmacy: `مسافران بیمار نیاز فوری به دارو دارند. 
+            اطلاعات کامل خدمات و داروهای موجود، شما را به انتخاب اول تبدیل می‌کند. 
+                    سلامت مسأله‌ای است که هزینه در آن مطرح نیست.`,
+            
+            gift: `مسافران به دنبال سوغات و هدیه منحصربه‌فرد می‌گردند. 
+            معرفی محصولات محلی و صنایع دستی، فروش شما را افزایش می‌دهد. 
+            مسافران برای سوغات بودجه مشخصی در نظر گرفته‌اند.`,
+            
+            bakery: `مهمانان هتل‌ها و مسافران صبحانه تازه و با کیفیت می‌خواهند. 
+            نمایش ساعت کاری و محصولات تازه، کمک می‌کند شما را سریع پیدا کنند. 
+            نان و شیرینی جزو خریدهای ضروری و روزانه مسافران است.`,
+            
+            laundry: `مسافران طولانی‌مدت و مهمانان هتل‌ها به خشکشویی نیاز دارند. 
+            خدمات تحویل در هتل، مشتریان ثابت و وفادار ایجاد می‌کند. 
+            مسافران کسب‌وکاری برای خدمات سریع و باکیفیت هزینه می‌پردازند.`,
+            
+            book: `گردشگران فرهنگی به دنبال کتاب‌های محلی و تاریخی می‌گردند. 
+            معرفی کتاب‌های مرتبط با ایذه و فرهنگ منطقه، مشتریان خاص جذب می‌کند. 
+            کتاب‌خوان‌ها حاضرند برای کتاب منحصربه‌فرد سفر کنند.`
+        };
+        
+        const jobStats = {
+            boutique: { visitors: 420, conversion: 28, growth: 65 },
+            underwear: { visitors: 380, conversion: 35, growth: 70 },
+            shoes: { visitors: 410, conversion: 32, growth: 60 },
+            grocery: { visitors: 550, conversion: 40, growth: 75 },
+            dryfruit: { visitors: 480, conversion: 45, growth: 80 },
+            restaurant: { visitors: 520, conversion: 38, growth: 70 },
+            salon: { visitors: 460, conversion: 42, growth: 68 },
+            repair: { visitors: 390, conversion: 48, growth: 85 },
+            coffee: { visitors: 440, conversion: 30, growth: 55 },
+            electronics: { visitors: 430, conversion: 33, growth: 62 },
+            pharmacy: { visitors: 510, conversion: 50, growth: 90 },
+            gift: { visitors: 370, conversion: 25, growth: 50 },
+            childcloth: { visitors: 400, conversion: 36, growth: 72 },
+            bakery: { visitors: 490, conversion: 44, growth: 78 },
+            laundry: { visitors: 360, conversion: 52, growth: 88 },
+            book: { visitors: 320, conversion: 22, growth: 45 }
+        };
+        
+        // انتخاب اولیه
+        let selectedJob = 'grocery';
+        
+        // عناصر
+        const businessBtns = document.querySelectorAll('.business-btn');
+        const customerSlider = document.getElementById('customerSlider');
+        const priceSlider = document.getElementById('priceSlider');
+        const daysSlider = document.getElementById('daysSlider');
+        const currentIncomeEl = document.getElementById('currentIncome');
+        const potentialIncomeEl = document.getElementById('potentialIncome');
+        const analysisText = document.getElementById('analysisText');
+        const visitorCount = document.getElementById('visitorCount');
+        const conversionRate = document.getElementById('conversionRate');
+        const growthPotential = document.getElementById('growthPotential');
+        const whatsappButton = document.getElementById('whatsappButton');
+        
+        // فرمت اعداد
+        function formatNumber(num) {
+            return new Intl.NumberFormat('fa-IR').format(num);
+        }
+        
+        // محاسبه درآمد
+        function calculateIncome() {
+            const customers = parseInt(customerSlider.value);
+            const price = parseInt(priceSlider.value);
+            const days = parseInt(daysSlider.value);
+            
+            // به‌روزرسانی مقادیر اسلایدرها
+            document.getElementById('customerValue').textContent = customers + ' نفر';
+            document.getElementById('priceValue').textContent = formatNumber(price) + ' تومان';
+            document.getElementById('daysValue').textContent = days + ' روز';
+            
+            // محاسبه درآمد
+            const dailyIncome = customers * price;
+            const monthlyIncome = dailyIncome * days;
+            const stats = jobStats[selectedJob] || jobStats.grocery;
+            const potentialIncome = Math.floor(monthlyIncome * (1 + stats.growth / 100));
+            
+            // نمایش
+            currentIncomeEl.textContent = formatNumber(monthlyIncome);
+            potentialIncomeEl.textContent = formatNumber(potentialIncome);
+            
+            // به‌روزرسانی تحلیل
+            updateAnalysis();
+        }
+        
+        // به‌روزرسانی تحلیل
+        function updateAnalysis() {
+            const analysis = jobAnalysis[selectedJob] || jobAnalysis.grocery;
+            const stats = jobStats[selectedJob] || jobStats.grocery;
+            
+            // اضافه کردن سطر پایانی ترغیب‌کننده
+            const finalPush = `<br><br><strong>نتیجه:</strong>  با یک صفحه معرفی‌اختصاصی، 
+         دربلاگ ما   می‌توانید ماهانه <span style="color: #059669; font-weight: 700;">${formatNumber(Math.floor((parseInt(currentIncomeEl.textContent.replace(/,/g, '')) * stats.growth / 100)))} تومان</span> 
+            درآمد بیشتر داشته باشید. این فرصت را از دست ندهید!`;
+            
+            analysisText.innerHTML = analysis + finalPush;
+            visitorCount.textContent = stats.visitors + "+";
+            conversionRate.textContent = stats.conversion + "%";
+            growthPotential.textContent = stats.growth + "%";
+        }
+        
+        // به‌روزرسانی واتساپ
+        function updateWhatsapp() {
+            const jobName = [...businessBtns].find(btn => btn.dataset.job === selectedJob)?.textContent || "کسب‌وکار";
+            const current = currentIncomeEl.textContent;
+            const potential = potentialIncomeEl.textContent;
+            const stats = jobStats[selectedJob] || jobStats.grocery;
+            const lostIncome = formatNumber(Math.floor((parseInt(current.replace(/,/g, '')) * stats.growth / 100)));
+            
+            const message = `سلام، از ماشین حساب درآمد خوزستان استفاده کردم.
+
+📊 *نتایج تحلیل کسب‌وکار من:*
+
+🛍️ شغل: ${jobName}
+💰 درآمد فعلی: ${current} تومان در ماه
+🎯 پتانسیل واقعی: ${potential} تومان در ماه
+📈 رشد ممکن: ${stats.growth}٪ افزایش درآمد
+💸 درآمد از دست رفته ماهانه: ${lostIncome} تومان
+
+💡 *می‌خواهم صفحه اختصاصی داشته باشم تا:*
+۱. مسافران شهرهای دیگر را جذب کنم
+۲. درآمد خود را ${stats.growth}٪ افزایش دهم
+۳. از رقبا پیشی بگیرم
+
+لطفاً راهنمایی کنید چطور صفحه اختصاصی حرفه‌ای برای کسب‌وکارم بسازم.`;
+
+            whatsappButton.onclick = function() {
+                window.open(`https://wa.me/989220730628?text=${encodeURIComponent(message)}`, '_blank');
+            };
+        }
+        
+        // انتخاب کسب‌وکار
+        businessBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                businessBtns.forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedJob = this.dataset.job;
+                
+                calculateIncome();
+                updateAnalysis();
+                updateWhatsapp();
+            });
+        });
+        
+        // رویداد اسلایدرها
+        customerSlider.addEventListener('input', calculateIncome);
+        priceSlider.addEventListener('input', calculateIncome);
+        daysSlider.addEventListener('input', calculateIncome);
+        
+        // مقداردهی اولیه
+        businessBtns[4].classList.add('selected');
+        calculateIncome();
+        updateAnalysis();
+        updateWhatsapp();
+    </script>
+</body>
+  </html>
